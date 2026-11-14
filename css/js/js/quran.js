@@ -1,17 +1,18 @@
 
 (function () {
   "use strict";
-
-  const surahList = document.getElementById("surah-list");
-  const readerSelect = document.getElementById("quran-reader");
-
-  const readers = {
-    mishary: "ar.alafasy",
-    husary: "ar.husary",
-    abdulbasit: "ar.abdulbasitmurattal",
-    sudais: "ar.abdurrahmaansudais"
-  };
-
+const readers = {
+  mishary: "ar.alafasy",
+  husary: "ar.husary",
+  abdulbasit: "ar.abdulbasitmurattal",
+  sudais: "ar.abdurrahmaansudais",
+  minshawi: "ar.minshawi",
+  shuraim: "ar.shuraim",
+  ajamy: "ar.ajamy",
+  jibreel: "ar.muhammadjibreel",
+  ayoub: "ar.muhammadayoub",
+  hudhaify: "ar.hudhaify"
+};
   const audio = new Audio();
   audio.preload = "none";
 
