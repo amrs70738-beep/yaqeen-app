@@ -5,11 +5,18 @@
   const surahList = document.getElementById("surah-list");
   const readerSelect = document.getElementById("quran-reader");
 
+  // القراء
   const readers = {
     mishary: "ar.alafasy",
     husary: "ar.husary",
     abdulbasit: "ar.abdulbasitmurattal",
-    sudais: "ar.abdurrahmaansudais"
+    sudais: "ar.abdurrahmaansudais",
+    minshawi: "ar.minshawi",
+    shuraim: "ar.shuraim",
+    ajamy: "ar.ajamy",
+    jibreel: "ar.muhammadjibreel",
+    ayoub: "ar.muhammadayoub",
+    hudhaify: "ar.hudhaify"
   };
 
   const audio = new Audio();
@@ -18,7 +25,6 @@
   let surahs = [];
   let currentAyahs = [];
   let currentAyahIndex = 0;
-  let currentSurah = 0;
   let playRequest = 0;
 
   async function loadSurahs() {
@@ -84,9 +90,8 @@
   async function playSurah(surahNumber) {
     const requestId = ++playRequest;
 
-    currentSurah = surahNumber;
-    currentAyahIndex = 0;
     currentAyahs = [];
+    currentAyahIndex = 0;
 
     const reader = readerSelect
       ? readerSelect.value
@@ -96,6 +101,7 @@
 
     try {
       audio.pause();
+      audio.removeAttribute("src");
 
       const response = await fetch(
         "https://api.alquran.cloud/v1/surah/" +
@@ -167,12 +173,7 @@
     if (currentAyahs.length === 0) return;
 
     currentAyahIndex++;
-
-    if (currentAyahIndex < currentAyahs.length) {
-      playCurrentAyah(playRequest);
-    } else {
-      currentAyahs = [];
-    }
+    playCurrentAyah(playRequest);
   });
 
   audio.addEventListener("error", function () {
